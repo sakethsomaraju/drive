@@ -8,9 +8,13 @@ const PORT = process.env.PORT || 3001
 
 app.use(cors())
 app.use(express.json())
-app.use(cors({
-    origin: 'http://localhost:3000'
-  }));
+app.use((req,res,next)=>{
+  res.header("Access-Control-Aloow-Origin","*")
+  res.header("Access-Control-Allow-Headers",
+  "Origin, X-Requested-With,Content-Type,Accept,Authorization")
+  res.header('Access-Control-Allow-Methods','GET,PUT,PATCH,POST,DELETE,OPTIONS')
+  next()
+})
 app.use(router)
 
 app.listen(PORT,()=>{
